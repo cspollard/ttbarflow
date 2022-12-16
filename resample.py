@@ -33,6 +33,8 @@ def fitpolyexp(densities, binning):
 
   optcoeff = scipy.optimize.curve_fit(polyexp, centers, densities, p0=numpy.zeros((3,)))[0]
 
+  print(optcoeff)
+
   def f(xs):
     return polyexp(xs, optcoeff[0], optcoeff[1], optcoeff[2])
 
