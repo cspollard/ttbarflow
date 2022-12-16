@@ -43,7 +43,6 @@ def fitpolyexp(densities, binning):
 
 ptbinning = toppt["binning"]
 
-
 MCinputs = numpy.loadtxt(argv[1], delimiter=",", skiprows=1)
 
 toppthist = numpy.histogram(MCinputs[:,0], bins=ptbinning, density=True)[0]
