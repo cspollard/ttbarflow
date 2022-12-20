@@ -74,33 +74,33 @@ def datafit(xs):
   return numpy.where(xs < ptbinning[BINSPLIT], datafitlow(xs), datafithigh(xs))
 
 
-# optional: plot the fits
 
-# fig = \
-#   cpplot.comparehist \
-#   ( [ cpplot.zeroerr(toppt["densities"]) , cpplot.zeroerr(toppthist) ]
-#   , numpy.array(toppt["binning"])
-#   , [ "data" , "Pythia8" ]
-#   , "$p_T^t$ / GeV"
-#   , "$\\frac{1}{\sigma}\\ \\frac{d\sigma}{dp_T^t}$ * GeV"
-#   , ratio=True
-#   )
+if __name__ == "__main__":
+  fig = \
+    cpplot.comparehist \
+    ( [ cpplot.zeroerr(toppt["densities"]) , cpplot.zeroerr(toppthist) ]
+    , numpy.array(toppt["binning"])
+    , [ "data" , "Pythia8" ]
+    , "$p_T^t$ / GeV"
+    , "$\\frac{1}{\sigma}\\ \\frac{d\sigma}{dp_T^t}$ * GeV"
+    , ratio=True
+    )
 
-# plt = fig.axes[0]
+  plt = fig.axes[0]
 
-# xs = numpy.mgrid[ptbinning[0]:ptbinning[-1]:1000j]
-# mcys = MCfit(xs)
-# datays = datafit(xs)
-# plt.plot(xs, mcys, color="red", label="Pythia 8 fit")
-# plt.plot(xs, datays, color="gray", label="data fit")
+  xs = numpy.mgrid[ptbinning[0]:ptbinning[-1]:1000j]
+  mcys = MCfit(xs)
+  datays = datafit(xs)
+  plt.plot(xs, mcys, color="red", label="Pythia 8 fit")
+  plt.plot(xs, datays, color="gray", label="data fit")
 
-# plt.legend()
-# plt.set_yscale("log")
+  plt.legend()
+  plt.set_yscale("log")
 
-# plt = fig.axes[1]
-# plt.set_ylabel("Pythia8 / data")
-# plt.plot(xs, mcys/datays, color="red")
+  plt = fig.axes[1]
+  plt.set_ylabel("Pythia8 / data")
+  plt.plot(xs, mcys/datays, color="red")
 
-# fig.savefig("dataMC.png")
-# fig.savefig("dataMC.pdf")
+  fig.savefig("dataMC.png")
+  fig.savefig("dataMC.pdf")
 
