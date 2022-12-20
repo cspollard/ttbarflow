@@ -2,7 +2,7 @@ import yoda
 
 yodadict = yoda.readYODA("ATLAS_2017_I1614149.yoda")
 
-toppt = yodadict["/REF/ATLAS_2017_I1614149/d26-x01-y01"]
+toppt = yodadict["/REF/ATLAS_2017_I1614149/d16-x01-y01"]
 ttpt = yodadict["/REF/ATLAS_2017_I1614149/d20-x01-y01"]
 ttm = yodadict["/REF/ATLAS_2017_I1614149/d24-x01-y01"]
 
