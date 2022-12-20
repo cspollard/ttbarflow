@@ -1,7 +1,3 @@
-"""
-usage : python fit.py input.csv
-"""
-
 import numpy
 from scipy import optimize
 from scipy import interpolate
@@ -15,8 +11,6 @@ BINSPLIT = 5
 # the degree of the exponential polynomial fit
 POLYEXPDEG = 3
 
-
-MCinputs = numpy.loadtxt(argv[1], delimiter=",", skiprows=1)
 
 toppt = \
   { "binning" : [0.0, 25.0, 50.0, 75.0, 105.0, 135.0, 165.0, 195.0, 230.0, 265.0, 300.0, 350.0, 400.0, 450.0, 500.0, 1000.0]
@@ -34,6 +28,19 @@ ttm = \
   }
 
 
+ptbinning = toppt["binning"]
+centers = (numpy.array(ptbinning[:-1]) + numpy.array(ptbinning[1:]) ) / 2.0
+
+if __name__ == "__main__":
+  MCinputs = numpy.loadtxt(argv[1], delimiter=",", skiprows=1)
+  toppthist = numpy.histogram(MCinputs[:,0], bins=ptbinning, density=True)[0]
+
+
+else:
+  toppthist = [0.001120432548921514, 0.0034034365319120276, 0.005144407458005426, 0.00610997800055159, 0.005606331736288828, 0.0041407708144926975, 0.002944751239473296, 0.0019148041352732431, 0.0012643039937107782, 0.0008272470636096503, 0.00048536683919878396, 0.0002657251159300379, 0.00014710126801485444, 8.081430028285006e-05, 1.0130649785457274e-05]
+
+
+
 def fitpolyexp(densities, binning):
   binning = numpy.array(binning)
 
@@ -45,18 +52,12 @@ def fitpolyexp(densities, binning):
 
   optcoeff = optimize.curve_fit(polyexp, centers, densities, p0=numpy.zeros((3,)))[0]
 
-  print(optcoeff)
-
   def f(xs):
     return polyexp(xs, optcoeff[0], optcoeff[1], optcoeff[2])
 
   return f
 
 
-ptbinning = toppt["binning"]
-centers = (numpy.array(ptbinning[:-1]) + numpy.array(ptbinning[1:]) ) / 2.0
-
-toppthist = numpy.histogram(MCinputs[:,0], bins=ptbinning, density=True)[0]
 
 MCfitlow = interpolate.interp1d(centers, toppthist, kind="linear", fill_value=toppthist[0], bounds_error=False)
 datafitlow = interpolate.interp1d(centers, toppt["densities"], kind="linear", fill_value=toppt["densities"][0], bounds_error=False)
