@@ -34,6 +34,7 @@ centers = (numpy.array(ptbinning[:-1]) + numpy.array(ptbinning[1:]) ) / 2.0
 if __name__ == "__main__":
   MCinputs = numpy.loadtxt(argv[1], delimiter=",", skiprows=1)
   toppthist = numpy.histogram(MCinputs[:,0], bins=ptbinning, density=True)[0]
+  print(toppthist)
 
 
 else:
